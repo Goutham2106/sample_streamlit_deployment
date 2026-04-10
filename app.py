@@ -6,31 +6,52 @@ st.set_page_config(page_title="Packers & Movers", page_icon="🚚", layout="cent
 # ---- Custom CSS ----
 st.markdown("""
 <style>
-/* Background */
+
+/* Full Background Image */
 [data-testid="stAppViewContainer"] {
-    background: linear-gradient(to right, #eef2f3, #dfe9f3);
+    background-image: url("https://images.unsplash.com/photo-1601584115197-04ecc0da31d7");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
 }
 
-/* Card Style */
+/* Dark overlay for readability */
+[data-testid="stAppViewContainer"]::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.85); /* light overlay */
+    z-index: 0;
+}
+
+/* Card (Glass Effect) */
 .card {
-    background-color: white;
+    background: rgba(255, 255, 255, 0.9);
     padding: 25px;
     border-radius: 15px;
-    box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
+    box-shadow: 0px 4px 20px rgba(0,0,0,0.2);
     margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
 }
 
 /* Title */
 .title {
     text-align: center;
-    font-size: 32px;
+    font-size: 34px;
     font-weight: bold;
-    color: #1f4e79;
+    color: #0a2a43;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
 }
 
 /* Button */
 .stButton>button {
-    background-color: #1f4e79;
+    background-color: #0a2a43;
     color: white;
     border-radius: 10px;
     height: 45px;
@@ -65,8 +86,6 @@ st.markdown('</div>', unsafe_allow_html=True)
 
 # ---- Button ----
 if st.button("💰 Calculate Bill"):
-
-    price = 0
 
     # Weight charge
     if w <= 10:
