@@ -1,12 +1,37 @@
 import streamlit as st
 
+# ---- Background Styling ----
+page_bg = """
+<style>
+[data-testid="stAppViewContainer"] {
+    background-color: #f5f7fa;  /* light background */
+    background-image: url("https://cdn-icons-png.flaticon.com/512/1995/1995574.png");
+    background-repeat: no-repeat;
+    background-position: right bottom;
+    background-size: 200px;
+}
+
+[data-testid="stHeader"] {
+    background: rgba(0,0,0,0);
+}
+
+[data-testid="stToolbar"] {
+    right: 2rem;
+}
+</style>
+"""
+
+st.markdown(page_bg, unsafe_allow_html=True)
+
+# ---- App Title ----
 st.title("🚚 Packers & Movers Billing System")
 
-# User Inputs
+# ---- User Inputs ----
 w = st.number_input("Enter weight (in quintals):", min_value=0)
 c_type = st.selectbox("Select connection type:", ["domestic", "commercial"])
 d = st.number_input("Enter distance (in km):", min_value=0)
 
+# ---- Button ----
 if st.button("Calculate Bill"):
     
     price = 0
