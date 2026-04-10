@@ -13,9 +13,10 @@ st.markdown("""
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
+    color: black;
 }
 
-/* Dark overlay for readability */
+/* Light Overlay */
 [data-testid="stAppViewContainer"]::before {
     content: "";
     position: fixed;
@@ -23,19 +24,20 @@ st.markdown("""
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(255, 255, 255, 0.85); /* light overlay */
+    background: rgba(255, 255, 255, 0.85);
     z-index: 0;
 }
 
-/* Card (Glass Effect) */
+/* Card Style */
 .card {
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.95);
     padding: 25px;
     border-radius: 15px;
     box-shadow: 0px 4px 20px rgba(0,0,0,0.2);
     margin-bottom: 20px;
     position: relative;
     z-index: 1;
+    color: black;
 }
 
 /* Title */
@@ -43,10 +45,15 @@ st.markdown("""
     text-align: center;
     font-size: 34px;
     font-weight: bold;
-    color: #0a2a43;
+    color: black;
     margin-bottom: 20px;
     position: relative;
     z-index: 1;
+}
+
+/* Labels */
+label, .stMarkdown, .stText, .stNumberInput, .stSelectbox {
+    color: black !important;
 }
 
 /* Button */
@@ -67,12 +74,13 @@ st.markdown("""
     text-align: center;
     font-size: 20px;
     font-weight: bold;
-    color: #003366;
+    color: black;
 }
+
 </style>
 """, unsafe_allow_html=True)
 
-# ---- Header ----
+# ---- Title ----
 st.markdown('<div class="title">🚚 Packers & Movers Billing System</div>', unsafe_allow_html=True)
 
 # ---- Input Card ----
@@ -87,7 +95,7 @@ st.markdown('</div>', unsafe_allow_html=True)
 # ---- Button ----
 if st.button("💰 Calculate Bill"):
 
-    # Weight charge
+    # Weight Charge
     if w <= 10:
         weight_price = w * 50
     elif w <= 30:
@@ -95,10 +103,10 @@ if st.button("💰 Calculate Bill"):
     else:
         weight_price = (10 * 50) + (20 * 75) + (w - 30) * 100
 
-    # Commercial charge
+    # Commercial Charge
     commercial_charge = 300 if c_type == "commercial" else 0
 
-    # Distance charge
+    # Distance Charge
     if d <= 15:
         distance_price = d * 100
     elif d <= 45:
@@ -106,6 +114,7 @@ if st.button("💰 Calculate Bill"):
     else:
         distance_price = (15 * 100) + (30 * 125) + (d - 45) * 150
 
+    # Total
     total = weight_price + distance_price + commercial_charge
 
     # ---- Output Card ----
