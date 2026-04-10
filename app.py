@@ -1,34 +1,38 @@
 import streamlit as st
-import pandas as pd
-import numpy as np
 
-# Title
-st.title("📊 Streamlit Demo App")
+st.title("🚚 Packers & Movers Billing System")
 
-# Text
-st.write("This is a simple Streamlit app deployed on Streamlit Cloud.")
+# User Inputs
+w = st.number_input("Enter weight (in quintals):", min_value=0)
+c_type = st.selectbox("Select connection type:", ["domestic", "commercial"])
+d = st.number_input("Enter distance (in km):", min_value=0)
 
-# User input
-name = st.text_input("Enter your name")
+if st.button("Calculate Bill"):
+    
+    price = 0
 
-if name:
-    st.success(f"Hello {name}, welcome to Streamlit!")
+    # Weight charge
+    if w <= 10:
+        price = w * 50
+    elif w <= 30:
+        price = (10 * 50) + (w - 10) * 75
+    else:
+        price = (10 * 50) + (20 * 75) + (w - 30) * 100
 
-# Slider
-number = st.slider("Select a number", 1, 100)
+    # Commercial charge
+    if c_type == "commercial":
+        price += 300
 
-st.write("Square of the number is:", number**2)
+    # Distance charge
+    distance_price = 0
 
-# Generate sample data
-data = pd.DataFrame(
-    np.random.randn(20, 3),
-    columns=["A", "B", "C"]
-)
+    if d <= 15:
+        distance_price = d * 100
+    elif d <= 45:
+        distance_price = (15 * 100) + (d - 15) * 125
+    else:
+        distance_price = (15 * 100) + (30 * 125) + (d - 45) * 150
 
-# Show dataframe
-st.subheader("Sample Data")
-st.dataframe(data)
+    total = price + distance_price
 
-# Chart
-st.subheader("Line Chart")
-st.line_chart(data)
+    st.success(f"💰 Total Amount: ₹{total}")
